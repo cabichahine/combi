@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Ve Insight</title>
+    <meta charset="utf-8">
+    <meta name="description" content="TimelineJS Embed">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <!-- CSS-->
+    <link rel="stylesheet" href="../css/timeline.css?v1">
+    <!--FONT-->
+    <link rel="stylesheet" href="../css/fonts/font.default.css?v1">
+    <!-- Style-->
+    <style>
+      html, body {
+      	height:100%;
+      	width:100%;
+      	padding: 0px;
+      	margin: 0px;
+      }
+      .tl-timeline {
+      
+      }
+      
+    </style>
+    <!-- HTML5 shim, for IE6-8 support of HTML elements-->
+    <!--if lt IE 9
+    script(src='https://html5shim.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body>
+    <div id="timeline"></div>
+    <!-- JavaScript-->
+    <script src="../js/timeline.js"></script>
+    <script>
+      var timeline = new TL.Timeline('timeline', 'datastories.json', {
+      	ga_property_id: "UA-27829802-4"
+      });
+
+      var justAdded = null;
+
+  timeline.on("change", function(data){
+    if(data.unique_id == "test"){
+      console.log("CLICKED");
+      timeline.removeId("test");
+      timeline.removeId("toto");
+      console.log("test after remove: ", timeline.getDataById("test"));
+      timeline.add({
+            "start_date": {
+                "year":         "2015",
+                "month":        "8",
+                "day":          "2",
+                "hour":         "7",
+                "minute":       "43",
+                "second":       "5",
+                "millisecond":  "",
+                "format":       ""
+            },
+            "media": {
+                "url": "images/RdC/rdcMontre.png",
+                "thumbnail": "http://www.google.com/s2/favicons?domain=http://www.rueducommerce.fr"
+
+            },
+            "background": {
+                "url": "images/ve_green_600_425.jpg"
+            },
+            "text": {
+                "headline": "LOL",
+                "text": "test"
+            },
+            "group": "truc",
+            "unique_id": "test"
+        });
+            timeline.add({
+            "start_date": {
+                "year":         "2015",
+                "month":        "8",
+                "day":          "2",
+                "hour":         "7",
+                "minute":       "53",
+                "second":       "5",
+                "millisecond":  "",
+                "format":       ""
+            },
+            "media": {
+                "url": "images/RdC/rdcMontre.png",
+                "thumbnail": "http://www.google.com/s2/favicons?domain=http://www.rueducommerce.fr"
+
+            },
+            "background": {
+                "url": "images/ve_green_600_425.jpg"
+            },
+            "text": {
+                "headline": "toto",
+                "text": "test"
+            },
+            "group": "truc",
+            "unique_id": "toto"
+        });
+        console.log("test: ", timeline.getDataById("test-2"));
+        timeline.goToId("test-2");
+        justAdded = "1";
+    }
+
+
+
+  });
+
+      timeline.on("removed", function(data) {
+
+        console.log("removed: ", data);
+        //timeline.goToId("1");
+      });
+
+      timeline.on("added", function(data) {
+
+        console.log("added: ", data);
+        //timeline.goToId("1");
+      });
+    </script>
+  </body>
+</html>
